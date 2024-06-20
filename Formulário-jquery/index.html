@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>JQuery Validation</title>		
+        <link rel="stylesheet" href="css/style.css">
+		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="js/additional-methods.min.js"></script>
+		<script type="text/javascript" src="js/localization/messages_pt_BR.js"></script>
+		
+		<script type="text/javascript">
+		
+			jQuery.validator.addMethod("arrobaNoInicio", function(value, element){
+				if (value.indexOf("@") == 0){
+					return true
+				}else{
+					return false
+				}
+			}, "Coloque um @ no inicio por favor!")
+		
+			$(document).ready(function(){
+				$("#formCadastro").validate({
+					rules:{
+						nome: {
+							required: true,
+							maxlength: 100,
+							minlength: 3
+						},
+                        Apelido: {
+                            required: true,
+                            maxlength: 20,
+							minlength: 3
+                        },
+						email: {
+							required: true,
+							email: true
+						},
+                        telefone: {
+                            required: true
+                        },
+						cidade: {
+							required: true
+						},
+						idade: {
+							required: true,
+							min: 1,
+							max: 120
+						},
+						instagram: {
+							arrobaNoInicio: true
+						}
+					},
+					submitHandler: function(form){
+						alert("Formulário enviado com sucesso! <3")						
+					}
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Validação de formulários com JQuery Validation</h1>
+			<form name="formCadastro" id="formCadastro" method="post">
+				<div class="row">
+					<label>Nome</label>
+					<input type="text" name="nome" id="nome" class="form-control" />
+				</div>
+                <div class="row">
+					<label>Apelido</label>
+					<input type="text" name="Apelido" id="Apelido" class="form-control" />
+				</div>
+				<div class="row">
+					<label>E-mail</label>
+					<input type="email" name="email" id="email" class="form-control" placeholder="seuemail@exemplo.com" />
+				</div>	
+                <div class="row">
+                    <label>Telefone</label>
+                    <input type="text" name="telefone" id="telefone" class="form-control" placeholder="(99) 9999-9999" pattern="(\([0-9]{2}\))\s([9]{1})?([0-9]{5})-([0-9]{4})"/>
+                </div>
+                 <div class="row">
+					<label>Estado</label>
+                    <select name="UF" id="UF" class="form-control">
+                        <option value="">Selecione</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espirito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                        <option value="ET">Estrangeiro</option>
+
+                    </select>
+				</div>			
+				<div class="row">
+					<label>Cidade</label>
+				<select name="cidade" id="cidade" class="form-control">
+                    <option value="">Selecione</option>
+                    <option value="Belo Horizonte">Belo Horizonte</option>
+                    <option value="Boa Vista">Boa Vista</option>
+                    <option value="Brasília">Brasília</option>
+                    <option value="Campo Grande">Campo Grande</option>
+                    <option value="Cuiabá">Cuiabá</option>
+                    <option value="Curitiba">Curitiba</option>
+                    <option value="Florianópolis">Florianópolis</option>
+                    <option value="Fortaleza">Fortaleza</option>
+                    <option value="Goiânia">Goiânia</option>
+                    <option value="João Pessoa">João Pessoa</option>
+                    <option value="Macapá">Macapá</option>
+                    <option value="Maceió">Maceió</option>
+                    <option value="Manaus">Manaus</option>
+                    <option value="Natal">Natal</option>
+                    <option value="Palmas">Palmas</option>
+                    <option value="Porto Alegre">Porto Alegre</option>
+                    <option value="Porto Velho">Porto Velho</option>
+                    <option value="Recife">Recife</option>
+                    <option value="Rio Branco">Rio Branco</option>
+                    <option value="Rio de Janeiro">Rio de Janeiro</option>
+                    <option value="Salvador">Salvador</option>
+                    <option value="São Luís">São Luís</option>
+                    <option value="São Paulo">São Paulo</option>
+                    <option value="Teresina">Teresina</option>
+                    <option value="Vitória">Vitória</option>
+                    <option value="Estrangeiro">Estrangeiro</option>
+					</select>
+				</div>
+				<div class="row">
+					<label>Idade</label>
+					<input type="number" name="idade" id="idade" class="form-control" />
+				</div>
+				<div class="row">
+					<label>Instagram</label>
+					<input type="text" name="instagram" id="instagram" class="form-control" placeholder="@seuinstagram"/>
+				</div>
+				<div class="row">
+					<input type="submit" name="enviar" id="enviar" class="btn btn-primary form-control botao" />
+				</div>
+			</form>
+		</div>
+	</body>
+</html>
